@@ -4,8 +4,9 @@
 #include<random>
 
 int main(int argc, char **argv){
-
+  //Declaramos las variables del problema
   double mean = 0;
+  double mean_sq=0;
   double sigma = 0.0;
   double x_val = 1;
   double x_p = 0.0;
@@ -24,33 +25,38 @@ int main(int argc, char **argv){
   std::uniform_real_distribution<double> dis(-a,a);
   std::uniform_real_distribution<double> P(0,1);
 
+  //Comienza el sampleo.
   for (int ii = 0; ii<samples; ++ii){
 
-    ++seed;
-    R = dis(gen);
-    x_p = x_val + step*R;
+    ++seed;//Variamos la semilla en cada ciclo.
 
-    DX= x_p*x_p - x_val*x_val;
-    ratio = std::exp(-DX);
-    u = P(gen);
+    R = dis(gen); //Establecemos el parámetro aleatorio de la propuesta de actualización.
 
-    if (u<ratio){
-      x_val=x_p;
+    x_p = x_val + step*R; // Se propone la catualización.
+
+    DX= x_p*x_p - x_val*x_val; //Se calcula el cambio en el argumento de la exponencial.
+    ratio = std::exp(-DX); //Se establece el ratio de aceptación.
+    u = P(gen); //Se genera un número aleatorio entre 0 y 1.
+
+    if (u<ratio){ 
+      x_val=x_p;  //Actualizamos según ratio de aceptación.
     }
 
 
     sum += x_val;
-    sum_sq += x_val*x_val;
+    sum_sq += x_val*x_val; // Actualizamos las variables importantes para calcilar el promedio y el promedio de los cuadrados.
     
     
      }
 
  
-  mean = sum /samples;
-  sigma = std::sqrt((sum_sq/samples)-mean*mean);
-  double mean_sq = sum_sq/samples;
+  mean = sum /samples; // Se calcula el promedio.
 
-  std::cout<<mean<<" "<<mean_sq<<std::endl;
+  sigma = std::sqrt((sum_sq/samples)-mean*mean); // Se calcula la desviación standard.
+
+  mean_sq = sum_sq/samples; // Promedio de los cuadrados.
+
+  std::cout<<mean<<" "<<mean_sq <<" "<< sigma<<std::endl; //Se imprimen los cálculos.
 
 
   return 0;
