@@ -3,9 +3,11 @@
 #include<vector>
 #include<random>
 #include<cstdlib>
-
+#include<algorithm>
+#include <omp.h>
 double action_change(const std::vector<double> X, const std::vector<double> X_old, const std::vector<double> X_new, int t,
-		     double omega, double m, int T);
+                     double omega, double m, int T);
+
 
 int main(int argc, char **argv){
 
@@ -35,29 +37,37 @@ int main(int argc, char **argv){
   corr_data.resize(T);
   int t = 0;
   int burn_in_st = 100000;
+//PROPOSAL:
+std::fill(X.begin(), X.end(), dis(gen));
+std::fill(X_old.begin(), X_old.end(), 0);
+std::fill(X_new.begin(), X_new.end(), 0);
+std::fill(corr_data.begin(), corr_data.end(), 0);
 
-  for(int ii=0; ii<T; ++ii){
-    ++seed;
-    X[ii] = dis(gen);
-    X_old[ii]=0;
-    X_new[ii]=0;
-    corr_data[ii]=0;
-  }
+  // for(int ii=0; ii<T; ++ii){
+//     ++seed;
+//     X[ii] = dis(gen);
+//     X_old[ii]=0;
+//     X_new[ii]=0;
+//     corr_data[ii]=0;
+//   }
+// /
+for (int ii =0; ii<N; ++ii){
+//Metropolis-Hasting
+  for (int ii = 0; ii<T; ++ii){
+    t = int(T*P(gen));
+    X_old[t] = X[t];
+    X_new[t] = X_old[t] + dis(gen);
+    DS = action_change(X, X_old, X_new, t, omega, m, T);
+    u = P(gen);
+    ratio = std::min(1.0, std::exp(-DS));
 
-  for (int ii =0; ii<N; ++ii){
-    for (int ii = 0; ii<T; ++ii){
-      t = int(T*P(gen));
-      X_old[t] = X[t];
-      X_new[t] = X_old[t] + dis(gen);
-      DS = action_change(X, X_old, X_new, t, omega, m, T);
-      u = P(gen);
-      ratio = std::exp(-DS);
       if (u<ratio){
-	X[t] = X_new[t];
+        X[t] = X_new[t];
       }
+
       else { X[t]=X_old[t];}
     }
-
+//correlation
     if (ii%gap==0){
 
       ++counter;
@@ -75,7 +85,7 @@ int main(int argc, char **argv){
   double mean_sq= X_sq/(2*T*counter);
   std::cout<<"The expected value of x² is "<<mean_sq<<std::endl;
 
-  std::cout << "The correlator data is"<< std::endl;
+  std::cout << "The correlator data is" << std::endl;
   for (int ii = 5; ii<T; ++ii ){
     std::cout<<corr_data[ii]<<" "<<std::endl;
    
