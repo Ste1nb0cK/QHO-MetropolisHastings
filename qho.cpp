@@ -1,4 +1,4 @@
-#include<iostream>
+ #include<iostream>
 #include<cmath>
 #include<vector>
 #include<random>
@@ -11,9 +11,8 @@ int main(int argc, char **argv){
 
   double m = 2;
   double omega = 1;
-  double epsilon = std::atof(argv[1]);
-  int T = std::atoi(argv[2]);
-  double N = std::atoi(argv[3]);
+  int T = std::atoi(argv[1]);
+  double N = std::atoi(argv[2]);
   int seed = 1;
   double counter = 0;
   double X_sq=0;
@@ -75,6 +74,12 @@ int main(int argc, char **argv){
   
   double mean_sq= X_sq/(2*T*counter);
   std::cout<<"The expected value of x² is "<<mean_sq<<std::endl;
+
+  std::cout << "The correlator data is"<< std::endl;
+  for (int ii = 5; ii<T; ++ii ){
+    std::cout<<corr_data[ii]<<" "<<std::endl;
+   
+  }
 
   
   
