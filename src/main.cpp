@@ -46,8 +46,8 @@ int main(int argc, char **argv){
 
   Metropolis_Hasting_Parallel(U, moves,  N, rd(), a,  g,  omega,  m,  epsilon,  pid,  np);
   
-  double X_sq = x_sq_Metropolis_Hasting_Parallel(U, moves, N, rd(), a, g, omega, m, epsilon, pid, np); 
-  std::cout << N << "\t" << moves << "\t" << omega << "\t" << X_sq << std::endl;
+  //double X_sq = x_sq_Metropolis_Hasting_Parallel(U, moves, N, rd(), a, g, omega, m, epsilon, pid, np); 
+  //std::cout << N << "\t" << moves << "\t" << omega << "\t" << X_sq << std::endl;
 
   MPI_Finalize();
  

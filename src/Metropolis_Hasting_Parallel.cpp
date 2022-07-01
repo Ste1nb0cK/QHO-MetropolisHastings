@@ -49,6 +49,6 @@ void Metropolis_Hasting_Parallel(std::vector<double> &U, int Nsweeps, int N, int
   MPI_Reduce(&mean_sq, &mean_sq_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
   if(0==pid){
     double x_sq=mean_sq_sum/np;
-    std::cout<<"The expected value of x² is: "<<x_sq<<std::endl;
+    std::cout<<Nsweeps<<"\t"<<x_sq<<std::endl;
   }
 }
