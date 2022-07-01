@@ -3,9 +3,9 @@ SHELL = /bin/sh
 SRC_DIR = ./src
 OBJ_DIR = ./build
 TEST_OBJ_DIR = ./tests/build_tests
-SRCS = $(shell find ${SRC_DIR} -name '*.cpp')
 OBJS = action_change.o fill.o main.o Metropolis_Hasting_Parallel.o Metropolis_Hasting_Serial.o transform_u_to_x.o \
 x_sq_Metropolis_Hasting_Parallel.o x_sq_Metropolis_Hasting_Serial.o
+SRCS = $(shell find ${SRC_DIR} -name '*.cpp')
 
 TESTSDIR = ./tests
 #specify to the compiler where to find the headers
@@ -18,7 +18,7 @@ SANITIZERS = #-fsanitize=leak -fsanitize=address -fsanitize=leak
 DEBUGFLAG = -g
 PROFILEFLAG= -pg
 #File list used for each test
-FILESTESTSIZE = clouster_matrix.cpp percolation.cpp index_matrix.cpp
+FILESTESTSIZE = x_sq_Metropolis_Hasting_Parallel.cpp action_change.cpp transform_u_to_x.cpp s_sq_Metropolis_Hasting_Serial.cpp
 TESTFLAG = $(shell pkg-config --cflags catch2)
 #specify profile report name
 PROF_REPORT = prof_report.txt
@@ -60,5 +60,7 @@ profile:
 
 test:
 	cp -v -u ./build/*.o tests/build_tests/
-	# rm tests/build_tests/main1_code.o
+	rm tests/build_tests/main.o
+	# rm tests/build_tests/Metropolis_Hasting_Parallel.o
+	# rm tests/build_tests/x_sq_Metropolis_Hasting_Parallel.o
 	cd tests; make; ./test.x
