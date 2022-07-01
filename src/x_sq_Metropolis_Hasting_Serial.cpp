@@ -1,4 +1,6 @@
 #include "x_sq_Metropolis_Hasting_Serial.hpp"
+#include "action_change.hpp"
+#include "transform_u_to_x.hpp"
 
 double x_sq_Metropolis_Hasting_Serial(std::vector<double> &U, int Nsweeps, int N, int seed, double a, double g, double omega, double m, double eps){
 
