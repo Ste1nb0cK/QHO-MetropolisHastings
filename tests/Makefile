@@ -14,7 +14,7 @@ SANITIZERS = -fsanitize=leak -fsanitize=address -fsanitize=leak
 DEBUGFLAG = -g
 PROFILEFLAG= -pg
 #File list used for each test
-FILESTESTSIZE = clouster_matrix.cpp percolation.cpp index_matrix.cpp
+FILESTESTSIZE = x_sq_Metropolis_Hasting_Serial.cpp action_change.cpp transform_u_to_x.cpp
 TESTFLAG = $(shell pkg-config --cflags catch2)
 #specify profile report name
 
