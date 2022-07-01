@@ -1,4 +1,6 @@
 #include "Metropolis_Hasting_Parallel.hpp"
+#include "action_change.hpp"
+#include "transform_u_to_x.hpp"
 
 void Metropolis_Hasting_Parallel(std::vector<double> &U, int Nsweeps, int N, int seed, double a, double g, double omega, double m, double eps, int pid, int np){
 

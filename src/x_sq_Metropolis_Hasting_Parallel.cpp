@@ -1,5 +1,6 @@
 #include "x_sq_Metropolis_Hasting_Parallel.hpp"
-
+#include "action_change.hpp"
+#include "transform_u_to_x.hpp"
 double x_sq_Metropolis_Hasting_Parallel(std::vector<double> &U, int Nsweeps, int N, int seed, double a, double g, double omega, double m, double eps, int pid, int np){
   std::mt19937 gen(seed);
   std::uniform_real_distribution<double> dis(-a,a);
