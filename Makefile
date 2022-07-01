@@ -32,7 +32,7 @@ foo: ${OBJS}
 
 clean:
 	-rm -f ${OBJ_DIR}/*.o foo* *.out ${PROF_REPORT}
-	# -cd tests; make clean
+	-cd tests; make clean
 
 #implicit rule for making .o from .cpp
 .cpp.o:
@@ -61,4 +61,4 @@ profile:
 test:
 	cp -v -u ./build/*.o tests/build_tests/
 	rm tests/build_tests/main1_code.o
-#cd tests; make; ./test.x
+	cd tests; make; ./test.x
