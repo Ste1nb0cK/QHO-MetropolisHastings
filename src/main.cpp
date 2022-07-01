@@ -4,7 +4,6 @@
 #include "fill.hpp"
 #include "Metropolis_Hasting_Parallel.hpp"
 #include "Metropolis_Hasting_Serial.hpp"
-#include "x_sq_Metropolis_Hasting_Parallel.hpp"
 #include "x_sq_Metropolis_Hasting_Serial.hpp"
 #include<iostream>
 #include<cmath>

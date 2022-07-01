@@ -3,8 +3,8 @@ SHELL = /bin/sh
 SRC_DIR = ./src
 OBJ_DIR = ./build
 TEST_OBJ_DIR = ./tests/build_tests
-OBJS = action_change.o fill.o main.o Metropolis_Hasting_Parallel.o Metropolis_Hasting_Serial.o transform_u_to_x.o \
-x_sq_Metropolis_Hasting_Parallel.o x_sq_Metropolis_Hasting_Serial.o
+OBJS = action_change.o Metropolis_Hasting_Parallel.o fill.o main.o  Metropolis_Hasting_Serial.o transform_u_to_x.o \
+ x_sq_Metropolis_Hasting_Serial.o
 SRCS = $(shell find ${SRC_DIR} -name '*.cpp')
 
 TESTSDIR = ./tests
@@ -32,6 +32,7 @@ foo: ${OBJS}
 
 clean:
 	-rm -f ${OBJ_DIR}/*.o foo* *.out ${PROF_REPORT}
+	rmdir ./build
 	-cd tests; make clean
 
 #implicit rule for making .o from .cpp
@@ -59,8 +60,7 @@ profile:
 	cat ${PROF_REPORT}
 
 test:
+	@ -mkdir tests/build_tests
 	cp -v -u ./build/*.o tests/build_tests/
 	rm tests/build_tests/main.o
-	# rm tests/build_tests/Metropolis_Hasting_Parallel.o
-	# rm tests/build_tests/x_sq_Metropolis_Hasting_Parallel.o
 	cd tests; make; ./test.x
