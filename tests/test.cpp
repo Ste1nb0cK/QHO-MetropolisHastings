@@ -14,7 +14,6 @@ TEST_CASE("Mean of X² computed", "[x_sq_Metropolis_Hasting_Serial]"){
   const double omega=1;
   const double k=std::pow(epsilon*omega*0.5,2);
   const double g=(1-k)/(1+k);
-  const double m=1;
   const double a = 0.5;
   const double seed=1;
   std::vector<double> U;
