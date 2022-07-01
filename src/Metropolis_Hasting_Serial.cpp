@@ -1,5 +1,4 @@
 #include "Metropolis_Hasting_Serial.hpp"
-
 void Metropolis_Hasting_Serial(std::vector<double> &U, int Nsweeps, int N, int seed, double a, double g, double omega, double m, double eps){
 
   std::mt19937 gen(seed);

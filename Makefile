@@ -14,7 +14,7 @@ INCLUDES = -I "./include"
 CXX = mpic++
 CXXFLAGS = -Wall
 OPTIMIZATIONFLAG = -O3
-SANITIZERS = -fsanitize=leak -fsanitize=address -fsanitize=leak
+SANITIZERS = #-fsanitize=leak -fsanitize=address -fsanitize=leak
 DEBUGFLAG = -g
 PROFILEFLAG= -pg
 #File list used for each test
@@ -32,7 +32,7 @@ foo: ${OBJS}
 
 clean:
 	-rm -f ${OBJ_DIR}/*.o foo* *.out ${PROF_REPORT}
-	-cd tests; make clean
+	# -cd tests; make clean
 
 #implicit rule for making .o from .cpp
 .cpp.o:
@@ -61,4 +61,4 @@ profile:
 test:
 	cp -v -u ./build/*.o tests/build_tests/
 	rm tests/build_tests/main1_code.o
-	cd tests; make; ./test.x
+#cd tests; make; ./test.x
